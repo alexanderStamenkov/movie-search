@@ -4,9 +4,7 @@ A responsive movie search app built with vanilla JavaScript and the OMDb API.
 
 ## Screenshots
 
-| Desktop                                                        | Mobile                                                       |
-| -------------------------------------------------------------- | ------------------------------------------------------------ |
-| <img src="screenshots/desktop.png" width="480" alt="Desktop"/> | <img src="screenshots/mobile.png" width="240" alt="Mobile"/> |
+| <img src="screenshots/cinemix.png" width="480" alt="Desktop"/>
 
 ## Features
 
