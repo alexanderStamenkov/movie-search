@@ -1,0 +1,346 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap");
+
+:root {
+  --bg: #0c0c0e;
+  --bg-2: #111114;
+  --bg-3: #18181d;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.14);
+  --accent: #e63946;
+  --accent-dim: rgba(230, 57, 70, 0.12);
+  --gold: #f4c542;
+  --text-primary: #f0f0f5;
+  --text-secondary: #7a7a8c;
+  --text-muted: #3d3d4d;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NOISE TEXTURE ===== */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADER ===== */
+.header {
+  margin-bottom: 56px;
+}
+
+.header-top {
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 56px;
+  letter-spacing: 4px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}
+
+.tagline {
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-left: 22px;
+}
+
+/* ===== SEARCH ===== */
+.search-wrapper {
+  max-width: 640px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 6px 6px 20px;
+  transition: border-color 0.2s;
+}
+
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.search-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+#searchInput {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  min-width: 0;
+}
+
+#searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+#searchBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    transform 0.2s var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#searchBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* ===== MESSAGE ===== */
+.message {
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-secondary);
+  min-height: 24px;
+  margin-bottom: 16px;
+}
+
+.messageloading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== RESULTS GRID ===== */
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* ===== MOVIE CARD ===== */
+.movie-card {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition:
+    border-color 0.25s var(--ease),
+    transform 0.25s var(--ease),
+    box-shadow 0.25s;
+  cursor: pointer;
+  animation: fadeUp 0.5s var(--ease) both;
+}
+
+.movie-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.movie-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.movie-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.movie-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.movie-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.movie-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.movie-card:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.movie-card:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+.movie-poster {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s var(--ease);
+}
+
+.movie-card:hover .movie-poster img {
+  transform: scale(1.04);
+}
+
+.movie-type-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.movie-type-badge.movie {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.movie-type-badge.series {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.movie-type-badge.game {
+  color: #64ffda;
+  border-color: #64ffda;
+}
+
+.movie-info {
+  padding: 16px;
+}
+
+.movie-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.movie-year {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .container {
+    padding: 32px 16px 60px;
+  }
+
+  .logo {
+    font-size: 40px;
+  }
+
+  .search-box {
+    padding: 8px 8px 8px 16px;
+  }
+
+  #searchBtn span {
+    display: none;
+  }
+  #searchBtn {
+    padding: 12px 14px;
+  }
+
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .movie-poster img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 380px) {
+  .results {
+    grid-template-columns: 1fr;
+  }
+}
