@@ -41,8 +41,7 @@ const API_KEY = "your_api_key_here";
 
 movie-searcher/
 ├── screenshots/
-│ ├── desktop.png
-│ └── mobile.png
+│ ├── cinemix.png
 ├── index.html
 ├── styles.css
 ├── script.js
