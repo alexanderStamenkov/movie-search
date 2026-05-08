@@ -1,11 +1,6 @@
-if (typeof API_KEY === "undefined" || !API_KEY) {
-  alert(
-    "API_KEY не е намерен. Увери се, че config.js е зареден преди script.js.",
-  );
-}
+import { API_KEY } from "./config.js";
 
 const searchInput = document.getElementById("searchInput");
-
 const searchBtn = document.getElementById("searchBtn");
 const resultsContainer = document.getElementById("results");
 const messageEl = document.getElementById("message");
@@ -31,7 +26,6 @@ const searchMovies = async function () {
       `https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=${API_KEY}`,
     );
     const data = await res.json();
-    console.log(res);
 
     if (data.Response === "False") {
       showMessage(data.Error || "Няма намерени филми 😔");
