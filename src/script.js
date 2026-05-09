@@ -1,6 +1,7 @@
 import { API_KEY } from "./config.js";
 
 const searchInput = document.getElementById("searchInput");
+
 const searchBtn = document.getElementById("searchBtn");
 const resultsContainer = document.getElementById("results");
 const messageEl = document.getElementById("message");
