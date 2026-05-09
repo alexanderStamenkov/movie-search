@@ -1,0 +1,10 @@
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`d60ae935`,t=document.getElementById(`searchInput`),n=document.getElementById(`searchBtn`),r=document.getElementById(`results`),i=document.getElementById(`message`);function a(e,t=!1){i.textContent=e,i.className=`message`+(t?`loading`:``),r.innerHTML=``}var o=async function(){let n=t.value.trim();if(!n){a(`Моля, въведи име на файла!`);return}a(`Зареждане...`,!0);try{let t=await(await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(n)}&apikey=${e}`)).json();if(t.Response===`False`){a(t.Error||`Няма намерени филми 😔`);return}s(t.Search)}catch(e){a(`Грешка при свързване с сървъра. Провери интернет връзката си.`),console.error(e)}},s=function(e){r.innerHTML=``,i.textContent=``,e.forEach(e=>{let t=document.createElement(`div`);t.classList.add(`movie-card`);let n=e.Poster===`N/A`?`https://placehold.co/300x450/18181d/3d3d4d?text=No+Poster`:e.Poster,i=e.Type===`movie`?`movie`:e.Type===`series`?`series`:`game`;t.innerHTML=`
+      <div class="movie-poster">
+        <img src="${n}" alt="${e.Title}" loading="lazy">
+        <span class="movie-type-badge ${i}">${e.Type}</span>
+      </div>
+      <div class="movie-info">
+        <div class="movie-title">${e.Title}</div>
+        <div class="movie-year">${e.Year}</div>
+      </div>
+    `,r.appendChild(t)})};n.addEventListener(`click`,o),t.addEventListener(`keypress`,e=>{e.key===`Enter`&&o()});
